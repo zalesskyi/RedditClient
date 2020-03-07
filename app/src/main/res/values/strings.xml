@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RedditClient</string>
+    <string name="no_network">No connection</string>
+    <string name="server_error">Server error</string>
+</resources>
