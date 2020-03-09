@@ -9,14 +9,16 @@ data class SubRedditBean(@JsonProperty("id")
                          @JsonProperty("title")
                          val title: String?,
                          @JsonProperty("created")
-                         val created: Double?,
+                         val created: Long?,
                          @JsonProperty("url")
                          val url: String?,
-                         @JsonProperty("authorName")
+                         @JsonProperty("author")
                          val authorName: String?,
                          @JsonProperty("num_comments")
                          val commentsNumber: Int?,
                          @JsonProperty("subreddit")
                          val subRedditName: String?,
                          @JsonProperty("permalink")
-                         val permalink: String?)
+                         val permalink: String?,
+                         @JsonProperty("score")
+                         val score: Int?)

@@ -1,6 +1,7 @@
 package com.zalesskyi.redditclient
 
 import android.app.Application
+import com.zalesskyi.android.weatherapp.data.database.DatabaseCreator
 import com.zalesskyi.redditclient.di.ApiModule
 import com.zalesskyi.redditclient.di.DaggerAppComponent
 import com.zalesskyi.redditclient.di.InteractorsModule
@@ -16,7 +17,7 @@ class RedditApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        DatabaseCreator.createDb(this)
+        DatabaseCreator.createDb(this)
         instance = this
         initAppComponent()
     }

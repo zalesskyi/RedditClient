@@ -13,6 +13,6 @@ class SubRedditBeanConverterImpl : BaseInConverter<SubRedditBean, SubReddit>(),
 
     override fun processConvertInToOut(inObject: SubRedditBean) = inObject.run {
         SubRedditModel(id?.hashCode()?.toLong(), name, title, created, url,
-                authorName, commentsNumber, subRedditName, permalink)
+                authorName, commentsNumber, subRedditName, permalink, score)
     }
 }

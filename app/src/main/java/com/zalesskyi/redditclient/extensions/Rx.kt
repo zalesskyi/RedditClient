@@ -17,11 +17,6 @@ fun <T> Observable<T>.workAsync(): Observable<T> =
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Observable<T>.workBackground(): Observable<T> =
-    this
-        .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io())
-
 fun <T> Observable<T>.doAsync(successful: Consumer<T>,
                               error: Consumer<Throwable>,
                               loading: MediatorLiveData<Boolean>? = null,
@@ -49,11 +44,6 @@ fun <T> Flowable<T>.workAsync(): Flowable<T> =
     this
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-
-fun <T> Flowable<T>.workBackground(): Flowable<T> =
-    this
-        .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io())
 
 fun <T> Flowable<T>.doAsync(successful: Consumer<T>,
                             error: Consumer<Throwable>,
@@ -84,11 +74,6 @@ fun <T> Single<T>.workAsync(): Single<T> =
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-fun <T> Single<T>.workBackground(): Single<T> =
-    this
-        .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io())
-
 fun <T> Single<T>.doAsync(successful: Consumer<T>,
                           error: Consumer<Throwable>,
                           loading: MediatorLiveData<Boolean>? = null,
@@ -109,7 +94,6 @@ private fun <T> Single<T>.preSubscribe(loading: MediatorLiveData<Boolean>?, isSh
 }
 
 // endregion Single
-
 
 private fun MediatorLiveData<Boolean>.hideProgress() {
     postValue(false)

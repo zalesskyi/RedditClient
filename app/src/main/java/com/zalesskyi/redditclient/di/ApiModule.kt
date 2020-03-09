@@ -23,6 +23,7 @@ class ApiModule {
         private const val TIMEOUT_MS = 60 * 1000L
     }
 
+    @AppScope
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
@@ -39,16 +40,19 @@ class ApiModule {
         return builder.build()
     }
 
+    @AppScope
     @Provides
     fun provideMapper(): ObjectMapper =
         ObjectMapper()
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
+    @AppScope
     @Provides
     fun provideJackson(mapper: ObjectMapper): JacksonConverterFactory =
         JacksonConverterFactory.create(mapper)
 
+    @AppScope
     @Provides
     fun provideRestAdapter(jackson: JacksonConverterFactory, client: OkHttpClient): Retrofit =
         Retrofit.Builder()
@@ -58,11 +62,13 @@ class ApiModule {
             .client(client)
             .build()
 
+    @AppScope
     @Provides
-    fun provideWeatherApi(restAdapter: Retrofit): RedditApi =
+    fun provideRedditApi(restAdapter: Retrofit): RedditApi =
         restAdapter.create(RedditApi::class.java)
 
+    @AppScope
     @Provides
-    fun provideWeatherGateway(api: RedditApi): RedditGateway =
+    fun provideRedditGateway(api: RedditApi): RedditGateway =
         RedditGatewayImpl(api)
 }

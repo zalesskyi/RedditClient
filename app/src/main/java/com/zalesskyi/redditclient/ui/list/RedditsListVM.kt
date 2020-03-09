@@ -17,16 +17,26 @@ class RedditsListVM(application: Application) : BaseLifecycleVM(application) {
 
     val redditsLD = MutableLiveData<List<SubReddit>>()
 
+    val moreRedditsLD = MutableLiveData<List<SubReddit>>()
+
     @Inject
     lateinit var interactor: RedditInteractor
 
-    private var lastRedditName: String? = null
+    private var lastReddit: SubReddit? = null
 
     fun loadReddits() {
-        interactor.getTopReddits(PAGE_LIMIT, lastRedditName)
+        interactor.getTopReddits(PAGE_LIMIT, lastReddit?.name)
                 .doOnSuccess { reddits ->
-                    lastRedditName = reddits.lastOrNull()?.name
+                    lastReddit = reddits.lastOrNull()
                 }
                 .doAsync(redditsLD)
+    }
+
+    fun loadMoreReddits() {
+        interactor.getTopReddits(PAGE_LIMIT, lastReddit?.name)
+            .doOnSuccess { reddits ->
+                lastReddit = reddits.lastOrNull()
+            }
+            .doAsync(moreRedditsLD)
     }
 }
